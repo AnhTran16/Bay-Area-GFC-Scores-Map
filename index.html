@@ -205,7 +205,7 @@ function scoreRows(sc){ return `<tr><td>Combined</td><td>${sc.comb} (#${sc.rank}
 function showTip(c,e){
   if(ds==='emp'){ showCountyTip(c.county,e,c.city); return; }
   let body;
-  if(ds==='zhvi'){ body=`<table>${scoreRows(cityScore(c))}<tr><td>GFC drawdown</td><td>${c.dd!=null?c.dd+'%':'n/a'}</td></tr><tr><td>Peak / trough</td><td>${c.peak} / ${c.trough}</td></tr><tr><td>Regained peak</td><td>${c.recov||'n/a'}${c.recov_m?' ('+Math.round(c.recov_m)+' mo)':''}</td></tr><tr><td>Latest vs pre-GFC peak</td><td>${c.lvp!=null?(c.lvp>=0?'+':'')+(c.lvp*100).toFixed(1)+'%':'n/a'}</td></tr><tr><td>Latest ZHVI</td><td>$${Math.round(c.zhvi).toLocaleString()}</td></tr></table>`; }
+  if(ds==='zhvi'){ body=`<table>${scoreRows(cityScore(c))}<tr><td>GFC drawdown</td><td>${c.dd!=null?c.dd+'%':'n/a'}</td></tr><tr><td>Peak / trough</td><td>${c.peak} / ${c.trough}</td></tr><tr><td>Regained peak</td><td>${c.recov||'n/a'}${c.recov_m?' ('+Math.round(c.recov_m)+' mo)':''}</td></tr><tr><td>Latest vs pre-GFC peak</td><td>${c.lvp!=null?(c.lvp>=0?'+':'')+(c.lvp*100).toFixed(1)+'%':'n/a'}</td></tr><tr><td>Pre-GFC peak ZHVI</td><td>${c.pk_zhvi!=null?'$'+Math.round(c.pk_zhvi).toLocaleString():'n/a'}</td></tr><tr><td>Latest ZHVI</td><td>$${Math.round(c.zhvi).toLocaleString()}</td></tr></table>`; }
   else { const p=c.supply;
     if(p.status!=='ok'){ const why={cdp:'Unincorporated place; permits through the county',nofile:'Not in the Census place permit file'}[p.status]; body=`<div style="margin-top:4px;color:var(--ink2)">No permit data: ${why}</div>`; }
     else body=`<table><tr><td><b>Avg permits / avg stock</b></td><td><b>${pf(p.pct_avg[series])}</b> (#${supplyRank(c)} of ${nOk})</td></tr>
